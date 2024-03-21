@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """ Module defines function wait_ random; An asynchronous coroutine """
 import asyncio
 import random

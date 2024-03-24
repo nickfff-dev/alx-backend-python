@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-import typing
-
 """
 This module provides a function to sum a list of integers and floats.
 
@@ -9,6 +7,8 @@ The sum_mixed_list function takes one parameter, a
 list of integers and floats, and returns their sum as a float.
 This module is designed to be imported and used in other Python scripts.
 """
+
+import typing
 
 
 def sum_mixed_list(mxd_lst: typing.List[typing.Union[int, float]]) -> float:

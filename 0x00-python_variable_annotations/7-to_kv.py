@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-import typing
-
 """
 This module provides a function to convert a key-value pair into a tuple.
 
@@ -11,6 +9,8 @@ is the key and the second element is the square of the value,
 annotated as a float.
 This module is designed to be imported and used in other Python scripts.
 """
+
+import typing
 
 
 def to_kv(k: str, v: typing.Union[int, float]) -> typing.Tuple[str, float]:

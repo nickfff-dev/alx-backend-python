@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-
-import typing
-
 """
 This module provides a function to sum a list of floating-point numbers.
 
@@ -9,6 +6,8 @@ The sum_list function takes one parameter, a list of floats,
 and returns their sum as a float.
 This module is designed to be imported and used in other Python scripts.
 """
+
+import typing
 
 
 def sum_list(input_list: typing.List[float]) -> float:

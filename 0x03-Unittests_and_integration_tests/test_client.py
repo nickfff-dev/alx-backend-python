@@ -131,13 +131,25 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         """Test that the public_repos method returns the expected list of
         repos."""
         # Create an instance of GithubOrgClient
-        client = GithubOrgClient('testorg')
+        client = GithubOrgClient('google')
 
         # Call the public_repos method
         repos = client.public_repos()
 
         # Assert that the returned list of repos is as expected
         self.assertEqual(repos, self.expected_repos)
+
+    def test_public_repos_with_license(self):
+        """Test that the public_repos method returns the expected list of
+        repos with a specific license."""
+        # Create an instance of GithubOrgClient
+        client = GithubOrgClient('google')
+
+        # Call the public_repos method
+        repos = client.public_repos('apache-2.0')
+
+        # Assert that the returned list of repos is as expected
+        self.assertEqual(repos, self.apache2_repos)
 
 
 if __name__ == '__main__':

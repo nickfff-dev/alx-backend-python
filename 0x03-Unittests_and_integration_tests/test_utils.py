@@ -3,7 +3,7 @@
 import unittest
 from unittest.mock import patch, Mock
 from parameterized import parameterized
-from utils import access_nested_map, get_json
+from utils import access_nested_map, get_json, memoize
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -33,9 +33,9 @@ class TestAccessNestedMap(unittest.TestCase):
 class TestGetJson(unittest.TestCase):
     """Test class for the get_json function in utils."""
     @parameterized.expand([
-            ("http://example.com", {"payload": True}),
-            ("http://holberton.io", {"payload": False})
-        ])
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False})
+    ])
     @patch("requests.get")
     def test_get_json(self, test_url, test_payload, mock_get):
         """Test that get_json returns the expected results."""
@@ -45,6 +45,37 @@ class TestGetJson(unittest.TestCase):
         self.assertEqual(get_json(test_url), test_payload)
         mock_get.assert_called_once_with(test_url)
         mock_get.reset_mock()
+
+
+class TestMemoize(unittest.TestCase):
+    """Test class for the memoize decorator in utils."""
+
+    def test_memoize(self):
+        """Test that the memoize decorator works as expected."""
+        class TestClass:
+            def a_method(self):
+                return 42
+
+            @memoize
+            def a_property(self):
+                return self.a_method()
+
+        # Create an instance of TestClass
+        test_instance = TestClass()
+
+        # Mock the a_method to ensure it's only called once
+        with patch.object(TestClass, 'a_method',
+                          return_value=42) as mock_a_method:
+            # Call a_property twice
+            result1 = test_instance.a_property
+            result2 = test_instance.a_property
+
+            # Assert that the correct result is returned
+            self.assertEqual(result1, 42)
+            self.assertEqual(result2, 42)
+
+            # Assert that a_method is only called once
+            mock_a_method.assert_called_once()
 
 
 if __name__ == '__main__':
